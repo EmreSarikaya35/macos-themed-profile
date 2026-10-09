@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#17253a">
+    <meta name="robots" content="noindex,nofollow">
+    <meta name="description" content="A personal desktop-style profile with live Discord presence, social links, a photo gallery, and mini games.">
+    <meta name="author" content="Your Name">
+    <link rel="canonical" href="https://example.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Your Name">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:url" content="https://example.com/">
+    <meta property="og:title" content="Your Name — Personal Profile">
+    <meta property="og:description" content="A personal desktop-style profile with live Discord presence, social links, a photo gallery, and mini games.">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Your Name — Personal Profile">
+    <meta name="twitter:description" content="A personal desktop-style profile with live Discord presence, social links, a photo gallery, and mini games.">
+    <script type="application/ld+json" id="profile-structured-data">{"@context":"https://schema.org","@type":"ProfilePage","name":"Your Name — Personal Profile","url":"https://example.com/","mainEntity":{"@type":"Person","name":"Your Name","alternateName":"yourname","url":"https://example.com/"}}</script>
+    <title id="page-title">Your Name — Personal Profile</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <a class="skip-link" href="#main-content">Skip to main content</a>
+    <div class="wallpaper" aria-hidden="true">
+        <div class="wallpaper-glow"></div>
+        <div class="wallpaper-horizon"></div>
+        <div class="wallpaper-orb"></div>
+    </div>
+
+    <header class="menubar">
+        <div class="menu-left">
+            <div class="theme-menu-wrap">
+                <button class="site-logo-button" id="theme-menu-button" type="button" aria-label="Tema ayarlarını aç" aria-expanded="false" aria-haspopup="true">
+                    <img src="favicon.svg" alt="Your Name logosu" width="23" height="23">
+                </button>
+                <div class="theme-menu" id="theme-menu" role="menu" aria-label="Görünüm ayarları" hidden>
+                    <p class="theme-menu-title" data-i18n="appearance">Appearance</p>
+                    <button type="button" class="theme-option" data-theme-choice="light" role="menuitemradio" aria-checked="true"><i class="fa-regular fa-sun"></i><span data-i18n="light">Light</span><i class="fa-solid fa-check theme-check"></i></button>
+                    <button type="button" class="theme-option" data-theme-choice="dark" role="menuitemradio" aria-checked="false"><i class="fa-regular fa-moon"></i><span data-i18n="dark">Dark</span><i class="fa-solid fa-check theme-check"></i></button>
+                </div>
+            </div>
+            <div class="language-menu-wrap">
+                <button class="language-button" id="language-menu-button" type="button" aria-label="Dil seçimi" aria-expanded="false" aria-haspopup="true"><span id="language-code">TR</span> <i class="fa-solid fa-chevron-down"></i></button>
+                <div class="language-menu" id="language-menu" role="menu" aria-label="Language" hidden></div>
+            </div>
+            <strong class="menu-app">Your Name</strong>
+            <button class="menu-item menu-action" id="profile-menu-shortcut" type="button" data-i18n="profile">Profile</button>
+            <span class="menu-item menu-extra" data-i18n="social">Social</span>
+        </div>
+        <div class="menu-right">
+            <button class="sound-button" id="volume-control" type="button" aria-label="Müziği sessize al / aç" title="Ses ayarları">
+                <i class="fa-solid fa-volume-high" id="volume-icon"></i>
+            </button>
+            <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="0.1" aria-label="Müzik seviyesi" title="Müzik seviyesi">
+            <div class="control-center-wrap">
+                <button class="control-center-button" id="control-center-button" type="button" aria-label="Open Control Center" aria-expanded="false" aria-haspopup="true" title="Control Center">
+                    <i class="fa-solid fa-sliders"></i>
+                </button>
+                <section class="control-center-panel" id="control-center-panel" aria-label="Control Center" hidden>
+                    <h2 id="control-center-title">Control Center</h2>
+                    <div class="control-center-status">
+                        <span class="control-center-icon"><i class="fa-solid fa-wifi" id="network-icon"></i></span>
+                        <span><small id="network-title">Internet</small><strong id="network-status">Connected</strong></span>
+                    </div>
+                    <button class="control-center-action" id="theme-toggle-action" type="button">
+                        <span class="control-center-icon"><i class="fa-regular fa-moon" id="theme-toggle-icon"></i></span>
+                        <span><small id="appearance-title">Appearance</small><strong id="theme-current-label">Light</strong></span>
+                        <i class="fa-solid fa-chevron-right control-chevron"></i>
+                    </button>
+                    <button class="control-center-action" id="open-profile-action" type="button">
+                        <span class="control-center-icon"><i class="fa-regular fa-id-card"></i></span>
+                        <span><small id="profile-action-title">Profile</small><strong id="open-profile-label">Open About Me</strong></span>
+                        <i class="fa-solid fa-chevron-right control-chevron"></i>
+                    </button>
+                </section>
+            </div>
+            <span class="menu-clock" id="menu-clock"></span>
+        </div>
+    </header>
+
+    <main class="desktop" id="main-content">
+        <aside class="weather-widget" id="weather-widget" aria-label="Weather">
+            <div class="weather-topline"><span id="weather-city">Your City</span><button class="weather-refresh" id="weather-refresh" type="button" aria-label="Refresh weather" title="Refresh"><i class="fa-solid fa-rotate"></i></button></div>
+            <div class="weather-main"><div><div class="weather-temperature" id="weather-temperature">--°</div><div class="weather-condition" id="weather-condition">Loading…</div></div><i class="fa-solid fa-cloud-sun weather-icon" id="weather-icon" aria-hidden="true"></i></div>
+            <div class="weather-range"><span><i class="fa-solid fa-temperature-half"></i> <span id="weather-feels-label">Feels like</span> <strong id="weather-feels">--°</strong></span><span><strong><span id="weather-high-label">H</span>: <span id="weather-high">--°</span></strong> <strong><span id="weather-low-label">L</span>: <span id="weather-low">--°</span></strong></span></div>
+            <div class="weather-state" id="weather-state" aria-live="polite">Loading live weather…</div>
+            <a class="weather-attribution" href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather data by Open-Meteo</a>
+        </aside>
+        <aside class="photo-widget" id="photo-widget" aria-label="Photos">
+            <div class="photo-widget-heading"><span id="photo-widget-title">Fotoğraflar</span><span class="photo-count" id="photo-count">0</span></div>
+            <button class="photo-feature" id="photo-feature" type="button" aria-label="Tüm fotoğrafları aç">
+                <img id="photo-feature-image" alt="" hidden>
+                <span class="photo-empty" id="photo-empty"><i class="fa-regular fa-images"></i><strong id="photo-empty-title">Galeri boş</strong><small id="photo-empty-hint">Fotoğrafları config.js içindeki photos listesine ekle.</small></span>
+            </button>
+            <div class="photo-widget-footer"><button id="photo-previous" type="button" aria-label="Önceki fotoğraf"><i class="fa-solid fa-chevron-left"></i></button><span id="photo-position">Galeriyi aç</span><button id="photo-next" type="button" aria-label="Sonraki fotoğraf"><i class="fa-solid fa-chevron-right"></i></button></div>
+        </aside>
+        <section class="profile-window" aria-label="Your Name profili">
+            <div class="window-titlebar">
+                <div class="window-controls">
+                    <button class="window-control close" type="button" data-window-action="close" aria-label="Close window" title="Close"></button>
+                    <button class="window-control minimize" type="button" data-window-action="minimize" aria-label="Minimize window" title="Minimize"></button>
+                    <button class="window-control maximize" type="button" data-window-action="maximize" aria-label="Maximize window" title="Maximize" aria-pressed="false"></button>
+                </div>
+                <span class="window-title" data-i18n="about">About Me</span>
+                <span class="window-spacer"></span>
+            </div>
+            <div class="window-content">
+                <div class="profile-heading">
+                    <div class="avatar-wrap">
+                        <img class="avatar" src="favicon.svg" alt="Your Name profil fotoğrafı" width="92" height="92">
+                        <span class="status-indicator offline" role="status" aria-label="Discord durumu"></span>
+                    </div>
+                    <div class="heading-copy">
+                        <p class="eyebrow" data-i18n="personalProfile">PERSONAL PROFILE</p>
+                        <h1 class="profile-name" id="profile-name">Your Name</h1>
+                        <p class="profile-handle" id="profile-username">yourname.</p>
+                    </div>
+                </div>
+                <div class="profile-rule"></div>
+                <div class="info-row"><span class="info-icon"><i class="fa-solid fa-location-dot"></i></span><span id="profile-location">Your city</span></div>
+                <div class="info-row status-row"><span class="info-icon"><i class="fa-brands fa-discord"></i></span><span class="activity" aria-live="polite">Discord durumu yükleniyor…</span></div>
+                <div class="window-footer"><span class="live-dot"></span><span data-i18n="connected">Connected to Discord</span><span class="footer-spacer"></span><span class="version-label">example.com</span></div>
+            </div>
+        </section>
+
+        <div class="desktop-app-grid" aria-label="Desktop applications">
+        <button class="desktop-shortcut" id="about-shortcut" type="button" aria-label="Open About Me">
+            <span class="desktop-shortcut-icon about-app-icon"><svg class="about-app-mark" viewBox="0 0 48 48" aria-hidden="true"><rect x="6.5" y="9" width="35" height="30" rx="6"/><circle cx="18" cy="20" r="4.2"/><path d="M10.5 33c1.4-4.1 4-6.1 7.5-6.1s6.1 2 7.5 6.1M29 19h7M29 25h7M29 31h5"/></svg></span>
+            <span id="about-shortcut-label">About Me</span>
+        </button>
+
+        <button class="desktop-shortcut snake-shortcut" id="snake-shortcut" type="button" aria-label="Open Snake">
+            <span class="desktop-shortcut-icon snake-shortcut-icon"><svg class="snake-app-mark" viewBox="0 0 48 48" aria-hidden="true"><path d="M13 28c0-5.2 4.2-9.4 9.4-9.4h7.1a5.7 5.7 0 1 0-5.7-5.7"/><path d="M35 20c0 5.2-4.2 9.4-9.4 9.4h-7.1a5.7 5.7 0 1 0 5.7 5.7"/><path d="M29.5 18.6h.1M18.5 29.4h.1"/></svg></span>
+            <span id="snake-shortcut-label">Snake</span>
+        </button>
+
+        <button class="desktop-shortcut mines-shortcut" id="mines-shortcut" type="button" aria-label="Open Minesweeper">
+            <span class="desktop-shortcut-icon mines-shortcut-icon"><i class="fa-solid fa-bomb" aria-hidden="true"></i></span>
+            <span id="mines-shortcut-label">Minesweeper</span>
+        </button>
+
+        <button class="desktop-shortcut notes-shortcut aux-shortcut" id="notes-shortcut" type="button" aria-label="Open Notes">
+            <span class="desktop-shortcut-icon notes-shortcut-icon"><i class="fa-solid fa-note-sticky" aria-hidden="true"></i></span><span id="notes-shortcut-label">Notes</span>
+        </button>
+        <button class="desktop-shortcut music-shortcut aux-shortcut" id="music-shortcut" type="button" aria-label="Open Apple Music">
+            <span class="desktop-shortcut-icon music-shortcut-icon"><i class="fa-solid fa-music" aria-hidden="true"></i></span><span id="music-shortcut-label">Music</span>
+        </button>
+        <button class="desktop-shortcut pong-shortcut aux-shortcut" id="pong-shortcut" type="button" aria-label="Open Pong">
+            <span class="desktop-shortcut-icon pong-shortcut-icon"><i class="fa-solid fa-table-tennis-paddle-ball" aria-hidden="true"></i></span><span id="pong-shortcut-label">Pong</span>
+        </button>
+        <button class="desktop-shortcut terminal-shortcut aux-shortcut" id="terminal-shortcut" type="button" aria-label="Open Terminal">
+            <span class="desktop-shortcut-icon terminal-shortcut-icon"><i class="fa-solid fa-terminal" aria-hidden="true"></i></span><span id="terminal-shortcut-label">Terminal</span>
+        </button>
+        <button class="desktop-shortcut trash-shortcut aux-shortcut" id="trash-shortcut" type="button" aria-label="Open Trash">
+            <span class="desktop-shortcut-icon trash-shortcut-icon"><i class="fa-solid fa-trash-can" aria-hidden="true"></i></span><span id="trash-shortcut-label">Trash</span>
+        </button>
+        </div>
+
+        <section class="snake-window" id="snake-window" aria-label="Snake game" hidden>
+            <div class="window-titlebar">
+                <div class="window-controls">
+                    <button class="window-control close" type="button" data-window-action="close" data-window="snake" aria-label="Close window" title="Close"></button>
+                    <button class="window-control minimize" type="button" data-window-action="minimize" data-window="snake" aria-label="Minimize window" title="Minimize"></button>
+                    <button class="window-control maximize" type="button" data-window-action="maximize" data-window="snake" aria-label="Maximize window" title="Maximize" aria-pressed="false"></button>
+                </div>
+                <span class="window-title" id="snake-window-title">Snake</span>
+                <span class="window-spacer"></span>
+            </div>
+            <div class="snake-content">
+                <div class="snake-heading">
+                    <div>
+                        <p class="eyebrow" id="snake-eyebrow">CLASSIC ARCADE</p>
+                        <h2 id="snake-heading">Snake</h2>
+                    </div>
+                    <div class="score-card"><span id="score-label">Score</span><strong id="snake-score" aria-live="polite">0</strong></div>
+                </div>
+                <canvas id="snake-board" width="400" height="400" aria-label="Snake game board"></canvas>
+                <p class="snake-message" id="snake-message" aria-live="polite">Press Start, then use the arrow keys.</p>
+                <div class="snake-actions">
+                    <button id="snake-start" class="snake-primary" type="button">Start</button>
+                    <button id="snake-reset" class="snake-secondary" type="button">Restart</button>
+                </div>
+                <p class="snake-instructions" id="snake-instructions">Use the arrow keys or WASD. On phones, use the direction buttons.</p>
+                <div class="snake-touch-controls" aria-label="Game controls">
+                    <button type="button" data-direction="up" aria-label="Up"><i class="fa-solid fa-chevron-up"></i></button>
+                    <div><button type="button" data-direction="left" aria-label="Left"><i class="fa-solid fa-chevron-left"></i></button><button type="button" data-direction="down" aria-label="Down"><i class="fa-solid fa-chevron-down"></i></button><button type="button" data-direction="right" aria-label="Right"><i class="fa-solid fa-chevron-right"></i></button></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mines-window" id="mines-window" aria-label="Minesweeper" hidden>
+            <div class="window-titlebar">
+                <div class="window-controls">
+                    <button class="window-control close" type="button" data-mines-action="close" aria-label="Close window" title="Close"></button>
+                    <button class="window-control minimize" type="button" data-mines-action="minimize" aria-label="Minimize window" title="Minimize"></button>
+                    <button class="window-control maximize" type="button" data-mines-action="maximize" aria-label="Maximize window" title="Maximize" aria-pressed="false"></button>
+                </div>
+                <span class="window-title" id="mines-window-title">Minesweeper</span>
+                <span class="window-spacer"></span>
+            </div>
+            <div class="mines-content">
+                <div class="mines-scorebar">
+                    <span class="mine-counter" id="mine-counter">010</span>
+                    <button class="mine-new-game" id="mine-new-game" type="button" aria-label="New game"><i class="fa-solid fa-face-smile" aria-hidden="true"></i></button>
+                    <span class="mine-timer" id="mine-timer">000</span>
+                </div>
+                <div class="mines-toolbar">
+                    <span id="mine-status" aria-live="polite">Choose a square to begin.</span>
+                    <label class="mine-difficulty-picker"><span id="mine-difficulty-label">Difficulty</span><select id="mine-difficulty" aria-label="Difficulty"><option value="easy">Easy</option><option value="medium">Medium</option><option value="hard">Hard</option></select></label>
+                </div>
+                <div class="mines-board" id="mines-board" role="grid" aria-label="Minesweeper board"></div>
+                <p class="mines-instructions" id="mines-instructions">Right-click to flag; press and hold a square on touchscreens.</p>
+            </div>
+        </section>
+
+        <section class="social-app-window" id="social-app-window" aria-label="Web app" hidden>
+            <div class="window-titlebar">
+                <div class="window-controls">
+                    <button class="window-control close" type="button" data-social-action="close" aria-label="Close window" title="Close"></button>
+                    <button class="window-control minimize" type="button" data-social-action="minimize" aria-label="Minimize window" title="Minimize"></button>
+                    <button class="window-control maximize" type="button" data-social-action="maximize" aria-label="Maximize window" title="Maximize" aria-pressed="false"></button>
+                </div>
+                <span class="window-title" id="social-app-title">App</span>
+                <a class="window-spacer social-open-link" id="social-open-link" href="#" target="_blank" rel="noopener noreferrer">Open in browser ↗</a>
+            </div>
+            <p class="social-frame-note" id="social-frame-note">This service prevents its page from opening inside another website. Open it in your browser to continue.</p>
+            <div class="social-launch-card">
+                <span class="social-launch-icon" id="social-app-mark"><i class="fa-brands fa-steam"></i></span>
+                <h2 id="social-app-card-title">Steam</h2>
+                <p id="social-app-card-caption">This service controls how its pages can be displayed. Open it in your browser to sign in and use its features.</p>
+                <a class="social-launch-button" id="social-app-open-button" href="#" target="_blank" rel="noopener noreferrer">Open in browser ↗</a>
+            </div>
+        </section>
+
+        <section class="aux-window notes-window" id="notes-window" aria-label="Notes" hidden>
+            <div class="window-titlebar"><div class="window-controls"><button class="window-control close" data-aux-action="close" data-aux-window="notes" aria-label="Close window" title="Close"></button><button class="window-control minimize" data-aux-action="minimize" data-aux-window="notes" aria-label="Minimize window" title="Minimize"></button><button class="window-control maximize" data-aux-action="maximize" data-aux-window="notes" aria-label="Maximize window" title="Maximize" aria-pressed="false"></button></div><span class="window-title" id="notes-window-title">Notes</span><span class="window-spacer"></span></div>
+            <div class="aux-content notes-content"><p class="aux-eyebrow" id="notes-eyebrow">ON THIS DEVICE</p><textarea id="notes-textarea" spellcheck="true" aria-label="Your notes" placeholder="Write a note…"></textarea><div class="notes-footer"><span class="live-dot"></span><span id="notes-save-state">Saved on this device</span></div></div>
+        </section>
+
+        <section class="aux-window music-window" id="music-window" aria-label="Apple Music" hidden>
+            <div class="window-titlebar"><div class="window-controls"><button class="window-control close" data-aux-action="close" data-aux-window="music" aria-label="Close window" title="Close"></button><button class="window-control minimize" data-aux-action="minimize" data-aux-window="music" aria-label="Minimize window" title="Minimize"></button><button class="window-control maximize" data-aux-action="maximize" data-aux-window="music" aria-label="Maximize window" title="Maximize" aria-pressed="false"></button></div><span class="window-title" id="music-window-title">Music</span><span class="window-spacer"></span></div>
+            <div class="aux-content music-content"><span class="music-art"><i class="fa-solid fa-music"></i></span><h2 id="music-heading">Apple Music</h2><p id="music-description">Open Apple Music to browse and play your library.</p><audio id="music-app-audio" preload="none"></audio><div class="music-player-controls" id="music-player-controls" hidden><button id="music-play-button" type="button" aria-label="Play">▶</button><input id="music-app-volume" type="range" min="0" max="1" step="0.01" value="0.5" aria-label="Music volume"></div><a class="aux-primary-link" id="apple-music-link" href="https://music.apple.com/" target="_blank" rel="noopener noreferrer">Open Apple Music ↗</a></div>
+        </section>
+
+        <section class="aux-window pong-window" id="pong-window" aria-label="Pong" hidden>
+            <div class="window-titlebar"><div class="window-controls"><button class="window-control close" data-aux-action="close" data-aux-window="pong" aria-label="Close window" title="Close"></button><button class="window-control minimize" data-aux-action="minimize" data-aux-window="pong" aria-label="Minimize window" title="Minimize"></button><button class="window-control maximize" data-aux-action="maximize" data-aux-window="pong" aria-label="Maximize window" title="Maximize" aria-pressed="false"></button></div><span class="window-title" id="pong-window-title">Pong</span><span class="window-spacer"></span></div>
+            <div class="aux-content pong-content"><div class="pong-scoreline"><span id="pong-player-label">YOU</span><strong><span id="pong-player-score">0</span><span class="pong-score-divider">:</span><span id="pong-computer-score">0</span></strong><span id="pong-computer-label">CPU</span></div><canvas id="pong-board" width="560" height="320" aria-label="Pong game"></canvas><p class="pong-message" id="pong-message">Press Start. Move with W/S or ↑/↓.</p><div class="aux-actions"><button class="aux-primary-button" id="pong-start" type="button">Start</button><button class="aux-secondary-button" id="pong-reset" type="button">Reset</button></div><div class="pong-touch-controls"><button type="button" data-pong-move="up" aria-label="Move up">▲</button><button type="button" data-pong-move="down" aria-label="Move down">▼</button></div></div>
+        </section>
+
+        <section class="aux-window terminal-window" id="terminal-window" aria-label="Terminal" hidden>
+            <div class="window-titlebar"><div class="window-controls"><button class="window-control close" data-aux-action="close" data-aux-window="terminal" aria-label="Close window" title="Close"></button><button class="window-control minimize" data-aux-action="minimize" data-aux-window="terminal" aria-label="Minimize window" title="Minimize"></button><button class="window-control maximize" data-aux-action="maximize" data-aux-window="terminal" aria-label="Maximize window" title="Maximize" aria-pressed="false"></button></div><span class="window-title" id="terminal-window-title">Terminal</span><span class="window-spacer"></span></div>
+            <div class="terminal-content"><div class="terminal-output" id="terminal-output" aria-live="polite"><p id="terminal-welcome">Your Name Terminal · Type “help” to see available commands.</p></div><form class="terminal-form" id="terminal-form"><label for="terminal-input">yourname@desktop:~$</label><input id="terminal-input" type="text" autocomplete="off" spellcheck="false" aria-label="Terminal command"><button type="submit" aria-label="Run command">↵</button></form></div>
+        </section>
+
+        <section class="aux-window trash-window" id="trash-window" aria-label="Trash" hidden>
+            <div class="window-titlebar"><div class="window-controls"><button class="window-control close" data-aux-action="close" data-aux-window="trash" aria-label="Close window" title="Close"></button><button class="window-control minimize" data-aux-action="minimize" data-aux-window="trash" aria-label="Minimize window" title="Minimize"></button><button class="window-control maximize" data-aux-action="maximize" data-aux-window="trash" aria-label="Maximize window" title="Maximize" aria-pressed="false"></button></div><span class="window-title" id="trash-window-title">Trash</span><span class="window-spacer"></span></div>
+            <div class="aux-content trash-content"><span class="trash-large-icon"><i class="fa-solid fa-trash-can"></i></span><h2 id="trash-heading">Trash is empty</h2><p id="trash-description">Nothing to see here. Your desktop is tidy.</p></div>
+        </section>
+
+        <section class="aux-window photos-window" id="photos-window" aria-label="Photo gallery" hidden>
+            <div class="window-titlebar"><div class="window-controls"><button class="window-control close" type="button" data-photos-action="close" aria-label="Close gallery" title="Close"></button><button class="window-control minimize" type="button" data-photos-action="minimize" aria-label="Minimize gallery" title="Minimize"></button><button class="window-control maximize" type="button" data-photos-action="maximize" aria-label="Maximize gallery" title="Maximize" aria-pressed="false"></button></div><span class="window-title" id="photos-window-title">Fotoğraflar</span><span class="window-spacer"></span></div>
+            <div class="photos-content"><div class="photos-toolbar"><span id="photos-gallery-count">0 fotoğraf</span></div><p class="photos-message" id="photos-message" aria-live="polite"></p><div class="photo-gallery-grid" id="photo-gallery-grid"></div></div>
+        </section>
+
+    </main>
+
+    <dialog class="photo-lightbox" id="photo-lightbox" aria-label="Fotoğraf önizleme">
+        <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Fotoğrafı kapat"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+        <button class="lightbox-nav lightbox-previous" id="lightbox-previous" type="button" aria-label="Önceki fotoğraf"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i></button>
+        <figure class="lightbox-figure"><img id="lightbox-image" alt=""><figcaption id="lightbox-caption"></figcaption></figure>
+        <button class="lightbox-nav lightbox-next" id="lightbox-next" type="button" aria-label="Sonraki fotoğraf"><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+    </dialog>
+
+    <div class="xp-welcome-toast" id="xp-welcome-toast" role="status" aria-live="polite" hidden>Gizli temaya hoş geldiniz: Windows XP</div>
+
+    <nav class="dock" aria-label="Sosyal bağlantılar" id="social-links-container">
+        <button class="dock-item dock-restore" id="restore-profile-dock" type="button" hidden>
+            <span class="dock-icon"><i class="fa-solid fa-window-restore"></i></span>
+            <span class="dock-label" id="restore-profile-label">About Me</span>
+        </button>
+        <button class="dock-item dock-restore" id="restore-snake-dock" type="button" hidden>
+            <span class="dock-icon"><i class="fa-solid fa-gamepad"></i></span>
+            <span class="dock-label" id="restore-snake-label">Snake</span>
+        </button>
+        <button class="dock-item dock-restore" id="restore-mines-dock" type="button" hidden>
+            <span class="dock-icon mines-shortcut-icon"><i class="fa-solid fa-bomb"></i></span>
+            <span class="dock-label" id="restore-mines-label">Minesweeper</span>
+        </button>
+        <button class="dock-item dock-restore" id="restore-social-app-dock" type="button" hidden>
+            <span class="dock-icon"><i class="fa-solid fa-globe"></i></span>
+            <span class="dock-label" id="restore-social-app-label">Web app</span>
+        </button>
+        <button class="dock-item dock-restore" id="restore-notes-dock" type="button" hidden><span class="dock-icon notes-shortcut-icon"><i class="fa-solid fa-note-sticky"></i></span><span class="dock-label" id="restore-notes-label">Notes</span></button>
+        <button class="dock-item dock-restore" id="restore-music-dock" type="button" hidden><span class="dock-icon music-shortcut-icon"><i class="fa-solid fa-music"></i></span><span class="dock-label" id="restore-music-label">Music</span></button>
+        <button class="dock-item dock-restore" id="restore-pong-dock" type="button" hidden><span class="dock-icon pong-shortcut-icon"><i class="fa-solid fa-table-tennis-paddle-ball"></i></span><span class="dock-label" id="restore-pong-label">Pong</span></button>
+        <button class="dock-item dock-restore" id="restore-terminal-dock" type="button" hidden><span class="dock-icon terminal-shortcut-icon"><i class="fa-solid fa-terminal"></i></span><span class="dock-label" id="restore-terminal-label">Terminal</span></button>
+        <button class="dock-item dock-restore" id="restore-trash-dock" type="button" hidden><span class="dock-icon trash-shortcut-icon"><i class="fa-solid fa-trash-can"></i></span><span class="dock-label" id="restore-trash-label">Trash</span></button>
+    </nav>
+
+    <audio id="background-music" loop preload="none"></audio>
+    <script src="config.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
